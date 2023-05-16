@@ -1,0 +1,17 @@
+.phaseWrap {
+  border: 1px solid #d5d5d5;
+  border-radius: var(--border-radius);
+  padding: .7rem;
+  margin-bottom: 1rem;
+
+  .title {
+    margin-top: 0;
+    margin-bottom: .5rem;
+  }
+
+  .detailsWrap {
+    display: flex;
+    padding: 0 .5rem;
+    justify-content: flex-end;
+  }
+}

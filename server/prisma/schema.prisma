@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets   = ["native", "linux-musl"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// of course Invoice should have user id as well,
+// but im simplyfy this for assigment
+model Invoice {
+    id   String @default(cuid()) @id
+    name String
+    relativePriceDiscount Float?
+    fee Float?
+
+    phases Phase[]
+}
+
+model Phase {
+    id String @default(cuid()) @id
+    name String
+    discount Float @default(0) // represent dicount if positive and fee if negative
+
+    invoiceId String
+    invoice Invoice @relation(fields: [invoiceId], references: [id],  onUpdate: Cascade)
+
+    costItems CostItem[]
+}
+
+// model have to be related to some kind of product or
+// service but i didn't add it to simplyfy things
+model CostItem {
+    id String @default(cuid()) @id
+    name String
+    billedByHour Boolean
+    amount Int // represent unit or hour
+    price Float
+
+    taxRateId String
+    taxRate TaxRate @relation(fields: [taxRateId], references: [id])
+
+    phaseId String
+    phase Phase @relation(fields: [phaseId], references: [id], onUpdate: Cascade)
+}
+
+model TaxRate {
+    id String @default(cuid()) @id
+    rate Float
+
+    costItem CostItem[]
+}

@@ -1,0 +1,45 @@
+type TaxRate {
+   id: ID!
+   rate: Float!
+}
+
+type CostItem {
+   id: ID!
+   name: String!
+   billedByHour: Boolean!
+   amount: Int!
+   price: Float!
+   finalPrice: Float!
+
+   phaseId: String
+   phase: Phase
+   taxRateId: String
+   taxRate: TaxRate
+}
+
+type Phase {
+   id: ID!
+   name: String!
+   discount: Float
+   subtotal: Float!
+
+   invoiceId: String
+   invoice: Invoice
+
+   costItems: [CostItem!]!
+}
+
+
+type Invoice {
+   id: ID!
+   name: String!
+   relativePriceDiscount: Float
+   phases: [Phase!]!
+   subtotalPrice: Float!
+   totalPrice: Float!
+}
+
+type Query {
+   invoices: [Invoice]!
+   invoice(id: String!): Invoice
+}

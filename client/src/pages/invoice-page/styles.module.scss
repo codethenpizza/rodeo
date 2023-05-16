@@ -1,0 +1,15 @@
+.invoiceDetailsWrapper {
+  background-color: #71b0c9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  .invoiceDetailsContainer {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 .5rem .7rem .3rem rgb(94 94 94 / 75%);
+  }
+}
+

@@ -1,0 +1,26 @@
+.costItem {
+  margin-bottom: 1rem;
+  padding: .5rem;
+  border-radius: var(--border-radius);
+
+  &:hover {
+    background-color: #f3f3f3;
+  }
+
+  .itemTitleWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .itemTitle {
+      margin-top: 0;
+      margin-bottom: .3rem;
+      margin-right: 1rem;
+    }
+  }
+
+  .itemBody {
+    display: flex;
+    justify-content: space-between;
+  }
+}

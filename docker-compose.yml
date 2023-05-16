@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  client:
+    build:
+      context: ./client
+      args:
+        - REACT_APP_API_URL
+    ports:
+      - 3000:8080
+
+  server:
+    build:
+      context: ./server
+    ports:
+      - 4000:4000
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - DATABASE_URL
+
+  postgres:
+    image: postgres:14
+    container_name: backend-db
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+
+volumes:
+  postgres:
+    name: backend
